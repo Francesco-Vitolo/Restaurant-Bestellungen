@@ -24,5 +24,17 @@ namespace Restaurant
         {
             InitializeComponent();
         }
+
+        private void Button_ZumHauptmenü(object sender, RoutedEventArgs e)
+        {
+            MainGrid_Menü.Visibility = Visibility.Visible;
+            MainGrid_SpeisekarteVerwalten.Visibility = Visibility.Hidden;
+        }
+
+        private void Button_SpeisekarteVerwalten(object sender, RoutedEventArgs e)
+        {
+            MainGrid_Menü.Visibility = Visibility.Hidden;
+            MainGrid_SpeisekarteVerwalten.Visibility = Visibility.Visible;
+        }
     }
 }

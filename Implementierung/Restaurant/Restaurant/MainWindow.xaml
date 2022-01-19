@@ -6,7 +6,68 @@
         xmlns:local="clr-namespace:Restaurant"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="300"/>
+        </Style>
+        <Style x:Key="Überschrift" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+
+        <Grid x:Name="MainGrid_Menü">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Gruppe 4" Style="{StaticResource Überschrift}"/>
+            <UniformGrid Grid.Row="1">
+                <UniformGrid.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}"/>
+                </UniformGrid.Resources>
+                <Button Content="Speisekarte verwalten" Click="Button_SpeisekarteVerwalten"/>
+                <Button Content="Rechnung erstellen"/>
+                <Button Content="Rechnungsübersicht"/>
+                <Button Content="Github Repository"/>
+            </UniformGrid>
+        </Grid>
+
+        <Grid x:Name="MainGrid_SpeisekarteVerwalten" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Speisekarte verwalten" Style="{StaticResource Überschrift}" Grid.Column="1"/>
+            <Button Content="Menü" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="75" Margin="16" Grid.Column="1" Click="Button_ZumHauptmenü"/>
+            <DataGrid Grid.Row="1" Grid.Column="1">
+                <!--Content-->
+            </DataGrid>
+            
+            <UniformGrid Grid.Column="1" Grid.Row="2" Margin="20" Height="250">
+                <UniformGrid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="10"/>
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="Width" Value="300"/>
+                    </Style>
+                </UniformGrid.Resources>
+                <Button Content="Ausgewähltes Element löschen" Background="Red" Opacity="0.75"/>
+                <Button Content="Änderungen Speichern" Background="Green" Opacity="0.75"/>
+            </UniformGrid>
+
+        </Grid>
     </Grid>
 </Window>
