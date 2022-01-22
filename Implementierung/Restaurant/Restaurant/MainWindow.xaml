@@ -33,9 +33,9 @@
                     <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}"/>
                 </UniformGrid.Resources>
                 <Button Content="Speisekarte verwalten" Click="Button_SpeisekarteVerwalten"/>
-                <Button Content="Rechnung erstellen"/>
-                <Button Content="Rechnungsübersicht"/>
-                <Button Content="Github Repository"/>
+                <Button Content="Rechnung erstellen" Click="Button_RechnungErstellen"/>
+                <Button Content="Rechnungsübersicht" Click="Button_Rechnungsübersicht"/>
+                <Button Content="Github Repository" Click="Button_Github"/>
             </UniformGrid>
         </Grid>
 
@@ -52,8 +52,13 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Speisekarte verwalten" Style="{StaticResource Überschrift}" Grid.Column="1"/>
             <Button Content="Menü" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="75" Margin="16" Grid.Column="1" Click="Button_ZumHauptmenü"/>
+            
             <DataGrid Grid.Row="1" Grid.Column="1">
-                <!--Content-->
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name"/>
+                    <DataGridTextColumn Header="Preis"/>
+                    <DataGridTextColumn Header="Beschreibung / Zutaten"/>
+                </DataGrid.Columns>
             </DataGrid>
             
             <UniformGrid Grid.Column="1" Grid.Row="2" Margin="20" Height="250">
@@ -65,7 +70,7 @@
                     </Style>
                 </UniformGrid.Resources>
                 <Button Content="Ausgewähltes Element löschen" Background="Red" Opacity="0.75"/>
-                <Button Content="Änderungen Speichern" Background="Green" Opacity="0.75"/>
+                <Button Content="Änderungen Speichern" Background="Green" Opacity="0.75" Click="Button_SaveChanges"/>
             </UniformGrid>
 
         </Grid>

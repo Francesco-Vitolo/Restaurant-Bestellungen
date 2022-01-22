@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,26 @@ namespace Restaurant
         {
             MainGrid_Menü.Visibility = Visibility.Hidden;
             MainGrid_SpeisekarteVerwalten.Visibility = Visibility.Visible;
+        }
+        private void Button_RechnungErstellen(object sender, RoutedEventArgs e)
+        {
+            MainGrid_Menü.Visibility = Visibility.Hidden;
+            //...
+        }
+        private void Button_Rechnungsübersicht(object sender, RoutedEventArgs e)
+        {
+            MainGrid_Menü.Visibility = Visibility.Hidden;
+            //...
+        }
+
+        private void Button_Github(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/Gruppe4-Restaurant/Restaurant-Bestellungen");
+        }
+
+        private void Button_SaveChanges(object sender, RoutedEventArgs e)
+        {
+            //ctx.SaveChanges...
         }
     }
 }
