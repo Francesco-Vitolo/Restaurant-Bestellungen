@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -21,10 +22,12 @@ namespace Restaurant
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Restaurant_TestEntities ctx = new Restaurant_TestEntities();
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();        
         }
+
 
         private void Button_ZumHauptmenü(object sender, RoutedEventArgs e)
         {
@@ -36,7 +39,28 @@ namespace Restaurant
         {
             MainGrid_Menü.Visibility = Visibility.Hidden;
             MainGrid_SpeisekarteVerwalten.Visibility = Visibility.Visible;
+            Speisekarte_Laden();
         }
+
+        private void Speisekarte_Laden()
+        {
+            ctx.Speise.Load();
+            MainGrid_SpeisekarteVerwalten.DataContext = ctx.Speise.ToList();
+        }
+        private void Button_DeleteCurrentItem(object sender, RoutedEventArgs e)
+        {
+            int id = (int)AusgewähltesProdukt_ID.Content;
+            Speise s = ctx.Speise.Where(x => x.ID_Speise == id).FirstOrDefault();
+            ctx.Speise.Remove(s);           
+        }
+        private void Button_SaveChanges(object sender, RoutedEventArgs e)
+        {
+            ctx.SaveChanges();
+            MainGrid_SpeisekarteVerwalten.DataContext = null;
+            MainGrid_SpeisekarteVerwalten.DataContext = ctx.Speise.ToList();
+        }
+
+
         private void Button_RechnungErstellen(object sender, RoutedEventArgs e)
         {
             MainGrid_Menü.Visibility = Visibility.Hidden;
@@ -53,9 +77,5 @@ namespace Restaurant
             Process.Start("https://github.com/Gruppe4-Restaurant/Restaurant-Bestellungen");
         }
 
-        private void Button_SaveChanges(object sender, RoutedEventArgs e)
-        {
-            //ctx.SaveChanges...
-        }
     }
 }
