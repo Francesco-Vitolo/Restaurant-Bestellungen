@@ -61,9 +61,9 @@ namespace Restaurant {
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         public static void Main() {
-            Restaurant.App app = new Restaurant.App();
-            app.InitializeComponent();
-            app.Run();
+            //Restaurant.App app = new Restaurant.App();
+            InitializeComponent();
+            Run();
         }
     }
 }

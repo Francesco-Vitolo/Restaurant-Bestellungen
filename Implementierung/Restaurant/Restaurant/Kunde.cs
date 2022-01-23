@@ -12,20 +12,18 @@ namespace Restaurant
     using System;
     using System.Collections.Generic;
     
-    public partial class Speise
+    public partial class Kunde
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Speise()
+        public Kunde()
         {
-            this.Rechnung_element = new HashSet<Rechnung_element>();
+            this.Rechnung = new HashSet<Rechnung>();
         }
     
-        public int Produkt_ID { get; set; }
-        public string Produkt_Name { get; set; }
-        public decimal Preis { get; set; }
-        public string Beschreibung { get; set; }
+        public int Kunde_id { get; set; }
+        public Nullable<int> Tisch_NR { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rechnung_element> Rechnung_element { get; set; }
+        public virtual ICollection<Rechnung> Rechnung { get; set; }
     }
 }

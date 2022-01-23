@@ -59,7 +59,7 @@
                       IsSynchronizedWithCurrentItem="True">
                 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Produkt_Name}"/>
                     <DataGridTextColumn Header="Preis" Binding="{Binding Preis}"/>
                     <DataGridTextColumn Header="Beschreibung / Zutaten" Binding="{Binding Beschreibung}"/>
                 </DataGrid.Columns>

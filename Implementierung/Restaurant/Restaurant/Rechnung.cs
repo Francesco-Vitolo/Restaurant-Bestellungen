@@ -12,20 +12,25 @@ namespace Restaurant
     using System;
     using System.Collections.Generic;
     
-    public partial class Speise
+    public partial class Rechnung
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Speise()
+        public Rechnung()
         {
             this.Rechnung_element = new HashSet<Rechnung_element>();
         }
     
-        public int Produkt_ID { get; set; }
-        public string Produkt_Name { get; set; }
-        public decimal Preis { get; set; }
-        public string Beschreibung { get; set; }
+        public int Rechnung_id { get; set; }
+        public Nullable<int> Kunde_id { get; set; }
+        public byte Rechnung_status { get; set; }
+        public System.DateTime Rechnung_datum { get; set; }
+        public int Restaurant_id { get; set; }
+        public int Mitarbeiter_id { get; set; }
     
+        public virtual Kunde Kunde { get; set; }
+        public virtual Mitarbeiter Mitarbeiter { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rechnung_element> Rechnung_element { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
     }
 }

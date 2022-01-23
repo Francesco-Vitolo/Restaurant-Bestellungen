@@ -22,7 +22,7 @@ namespace Restaurant
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Restaurant_TestEntities ctx = new Restaurant_TestEntities();
+        private Restaurant_BestellungenEntities ctx = new Restaurant_BestellungenEntities();
         public MainWindow()
         {
             InitializeComponent();        
@@ -50,7 +50,7 @@ namespace Restaurant
         private void Button_DeleteCurrentItem(object sender, RoutedEventArgs e)
         {
             int id = (int)AusgewähltesProdukt_ID.Content;
-            Speise s = ctx.Speise.Where(x => x.ID_Speise == id).FirstOrDefault();
+            Speise s = ctx.Speise.Where(x => x.Produkt_ID == id).FirstOrDefault();
             ctx.Speise.Remove(s);           
         }
         private void Button_SaveChanges(object sender, RoutedEventArgs e)

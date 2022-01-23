@@ -20,3 +20,11 @@ C:\Users\Francesco\Desktop\Restaurant\Restaurant-Bestellungen\Implementierung\Re
 C:\Users\Francesco\Desktop\Restaurant\Restaurant-Bestellungen\Implementierung\Restaurant\Restaurant\obj\Debug\Restaurant.csproj.CopyComplete
 C:\Users\Francesco\Desktop\Restaurant\Restaurant-Bestellungen\Implementierung\Restaurant\Restaurant\obj\Debug\Restaurant.exe
 C:\Users\Francesco\Desktop\Restaurant\Restaurant-Bestellungen\Implementierung\Restaurant\Restaurant\obj\Debug\Restaurant.pdb
+C:\Users\Francesco\Desktop\Restaurant-Bestellungen\Implementierung\Restaurant\Restaurant\obj\Debug\Restaurant.csproj.AssemblyReference.cache
+C:\Users\Francesco\Desktop\Restaurant-Bestellungen\Implementierung\Restaurant\Restaurant\obj\Debug\MainWindow.g.cs
+C:\Users\Francesco\Desktop\Restaurant-Bestellungen\Implementierung\Restaurant\Restaurant\obj\Debug\App.g.cs
+C:\Users\Francesco\Desktop\Restaurant-Bestellungen\Implementierung\Restaurant\Restaurant\obj\Debug\Restaurant_Content.g.cs
+C:\Users\Francesco\Desktop\Restaurant-Bestellungen\Implementierung\Restaurant\Restaurant\obj\Debug\Restaurant_MarkupCompile.cache
+C:\Users\Francesco\Desktop\Restaurant-Bestellungen\Implementierung\Restaurant\Restaurant\obj\Debug\Restaurant_MarkupCompile.lref
+C:\Users\Francesco\Desktop\Restaurant-Bestellungen\Implementierung\Restaurant\Restaurant\obj\Debug\Restaurant.exe
+C:\Users\Francesco\Desktop\Restaurant-Bestellungen\Implementierung\Restaurant\Restaurant\obj\Debug\Restaurant.pdb
