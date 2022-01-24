@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Restaurant_BestellungenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kunde">
+    <Key>
+      <PropertyRef Name="Kunde_id" />
+    </Key>
+    <Property Name="Kunde_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tisch_NR" Type="int" />
+  </EntityType>
+  <EntityType Name="Mitarbeiter">
+    <Key>
+      <PropertyRef Name="Mitarbeiter_id" />
+    </Key>
+    <Property Name="Mitarbeiter_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Vorname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nachname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Telefon" Type="varchar" MaxLength="25" />
+    <Property Name="Gehalt" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Strasse" Type="varchar" MaxLength="255" />
+    <Property Name="Stadt" Type="varchar" MaxLength="255" />
+    <Property Name="PLZ" Type="varchar" MaxLength="6" />
+    <Property Name="Restaurant_id" Type="int" Nullable="false" />
+    <Property Name="Restaurant_leiter" Type="int" />
+  </EntityType>
+  <EntityType Name="Rechnung">
+    <Key>
+      <PropertyRef Name="Rechnung_id" />
+    </Key>
+    <Property Name="Rechnung_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kunde_id" Type="int" />
+    <Property Name="Rechnung_status" Type="tinyint" Nullable="false" />
+    <Property Name="Rechnung_datum" Type="date" Nullable="false" />
+    <Property Name="Restaurant_id" Type="int" Nullable="false" />
+    <Property Name="Mitarbeiter_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rechnung_element">
+    <Key>
+      <PropertyRef Name="Rechnung_id" />
+      <PropertyRef Name="Element_id" />
+    </Key>
+    <Property Name="Rechnung_id" Type="int" Nullable="false" />
+    <Property Name="Element_id" Type="int" Nullable="false" />
+    <Property Name="Produkt_ID" Type="int" Nullable="false" />
+    <Property Name="Anzahl" Type="int" Nullable="false" />
+    <Property Name="Preis" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Restaurant">
+    <Key>
+      <PropertyRef Name="Restaurant_id" />
+    </Key>
+    <Property Name="Restaurant_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Restaurant_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Telefon" Type="varchar" MaxLength="25" />
+    <Property Name="Email" Type="varchar" MaxLength="255" />
+    <Property Name="Strasse" Type="varchar" MaxLength="255" />
+    <Property Name="Stadt" Type="varchar" MaxLength="255" />
+    <Property Name="PLZ" Type="varchar" MaxLength="6" />
+  </EntityType>
+  <EntityType Name="Speise">
+    <Key>
+      <PropertyRef Name="Produkt_ID" />
+    </Key>
+    <Property Name="Produkt_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Produkt_Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Preis" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Beschreibung" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="fk_Kunde">
+    <End Role="Kunde" Type="Self.Kunde" Multiplicity="0..1" />
+    <End Role="Rechnung" Type="Self.Rechnung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kunde">
+        <PropertyRef Name="Kunde_id" />
+      </Principal>
+      <Dependent Role="Rechnung">
+        <PropertyRef Name="Kunde_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Mitarbeiter">
+    <End Role="Mitarbeiter" Type="Self.Mitarbeiter" Multiplicity="1" />
+    <End Role="Rechnung" Type="Self.Rechnung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mitarbeiter">
+        <PropertyRef Name="Mitarbeiter_id" />
+      </Principal>
+      <Dependent Role="Rechnung">
+        <PropertyRef Name="Mitarbeiter_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Rechnung">
+    <End Role="Rechnung" Type="Self.Rechnung" Multiplicity="1" />
+    <End Role="Rechnung_element" Type="Self.Rechnung_element" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rechnung">
+        <PropertyRef Name="Rechnung_id" />
+      </Principal>
+      <Dependent Role="Rechnung_element">
+        <PropertyRef Name="Rechnung_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Restaurant">
+    <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+    <End Role="Mitarbeiter" Type="Self.Mitarbeiter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="Restaurant_id" />
+      </Principal>
+      <Dependent Role="Mitarbeiter">
+        <PropertyRef Name="Restaurant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_RestaurantRechnung">
+    <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+    <End Role="Rechnung" Type="Self.Rechnung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="Restaurant_id" />
+      </Principal>
+      <Dependent Role="Rechnung">
+        <PropertyRef Name="Restaurant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Speise">
+    <End Role="Speise" Type="Self.Speise" Multiplicity="1" />
+    <End Role="Rechnung_element" Type="Self.Rechnung_element" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Speise">
+        <PropertyRef Name="Produkt_ID" />
+      </Principal>
+      <Dependent Role="Rechnung_element">
+        <PropertyRef Name="Produkt_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Restaurant_BestellungenModelStoreContainer">
+    <EntitySet Name="Kunde" EntityType="Self.Kunde" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mitarbeiter" EntityType="Self.Mitarbeiter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rechnung" EntityType="Self.Rechnung" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rechnung_element" EntityType="Self.Rechnung_element" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Speise" EntityType="Self.Speise" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_Kunde" Association="Self.fk_Kunde">
+      <End Role="Kunde" EntitySet="Kunde" />
+      <End Role="Rechnung" EntitySet="Rechnung" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Mitarbeiter" Association="Self.fk_Mitarbeiter">
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="Rechnung" EntitySet="Rechnung" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Rechnung" Association="Self.fk_Rechnung">
+      <End Role="Rechnung" EntitySet="Rechnung" />
+      <End Role="Rechnung_element" EntitySet="Rechnung_element" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Restaurant" Association="Self.fk_Restaurant">
+      <End Role="Restaurant" EntitySet="Restaurant" />
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+    </AssociationSet>
+    <AssociationSet Name="fk_RestaurantRechnung" Association="Self.fk_RestaurantRechnung">
+      <End Role="Restaurant" EntitySet="Restaurant" />
+      <End Role="Rechnung" EntitySet="Rechnung" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Speise" Association="Self.fk_Speise">
+      <End Role="Speise" EntitySet="Speise" />
+      <End Role="Rechnung_element" EntitySet="Rechnung_element" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
