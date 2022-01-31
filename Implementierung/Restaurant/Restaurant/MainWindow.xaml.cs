@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Diagnostics;
@@ -21,7 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Restaurant_Bestellungen
+namespace Restaurant
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
@@ -54,7 +54,15 @@ namespace Restaurant_Bestellungen
             ctx.Speise.Load();
             MainGrid_SpeisekarteVerwalten.DataContext = ctx.Speise.ToList();
         }
-
+        private void Button_RechnungErstellen(object sender, RoutedEventArgs e)
+        {
+            MainGrid_Menü.Visibility = Visibility.Hidden;
+            MainGrid_Rechungen_erstellen.Visibility = Visibility.Visible;
+            ctx.Speise.Load();
+            SpeiseAufnehmen.DataContext = ctx.Speise.ToList();
+            Bestellung.DataContext = BestellungAufnehmen_Rechnungsposten;
+            //MainGrid_Rechungen_erstellen.DataContext = BestellungAufnehmen_Rechnungsposten;
+        }
 
         private void Button_Rechnungsübersicht(object sender, RoutedEventArgs e)
         {
@@ -69,7 +77,7 @@ namespace Restaurant_Bestellungen
         {
             Process.Start("https://github.com/Gruppe4-Restaurant/Restaurant-Bestellungen");
         }
-
+        //Speisekarte
         private void Button_DeleteCurrentItem(object sender, RoutedEventArgs e)
         {
             int id = (int)AusgewähltesProdukt_ID.Content; //Label (hidden)
@@ -113,7 +121,7 @@ namespace Restaurant_Bestellungen
             MainGrid_SpeisekarteVerwalten.DataContext = ctx.Speise.ToList();
         }
 
-
+        //Rechnungsübersicht
         private void Grid_Rechnungen_MouseDown(object sender, MouseButtonEventArgs e)
         {
             decimal total = 0;
@@ -133,9 +141,9 @@ namespace Restaurant_Bestellungen
         {
             ctx.SaveChanges();
         }
-
+        //Rechnung erstellen
         private void RechnungAufnehmen(object sender, MouseButtonEventArgs e)
-        {
+        {            
             Rechnung_element re = new Rechnung_element();
             Speise s = (Speise)SpeiseAufnehmen.SelectedItem;
             if (BestellungAufnehmen_Rechnungsposten != null && BestellungAufnehmen_Rechnungsposten.Any(x => x.Speise.Produkt_ID == s.Produkt_ID))
@@ -152,17 +160,7 @@ namespace Restaurant_Bestellungen
             Gesamt();
             Bestellung.DataContext = null;
             Bestellung.DataContext = BestellungAufnehmen_Rechnungsposten;
-        }
-
-        private void Button_RechnungErstellen(object sender, RoutedEventArgs e)
-        {
-            MainGrid_Menü.Visibility = Visibility.Hidden;
-            MainGrid_Rechungen_erstellen.Visibility = Visibility.Visible;
-            ctx.Speise.Load();
-            SpeiseAufnehmen.DataContext = ctx.Speise.ToList();
-            Bestellung.DataContext = BestellungAufnehmen_Rechnungsposten;
-            //MainGrid_Rechungen_erstellen.DataContext = BestellungAufnehmen_Rechnungsposten;
-        }
+        } 
 
         private void Delete(object sender, MouseButtonEventArgs e)
         {
@@ -189,20 +187,38 @@ namespace Restaurant_Bestellungen
 
         private void Rechnung_Speichern(object sender, RoutedEventArgs e)
         {
-            Rechnung neueRechnung = new Rechnung();
-            neueRechnung.Mitarbeiter_id = Convert.ToInt32(ID_Mitarbeiter.Text);
-            neueRechnung.Rechnung_status = "bezahlt";
-            neueRechnung.Tisch_ID = Convert.ToInt32(Tischnummer.Text);
-            ctx.Rechnung.Add(neueRechnung);
-
-            ctx.SaveChanges();
-            int id = neueRechnung.Rechnung_id;
-            foreach (var v in BestellungAufnehmen_Rechnungsposten)
+            if (ID_Mitarbeiter.Text == "")
             {
-                v.Rechnung_id = id;
-                ctx.Rechnung_element.Add(v);
+                MessageBox.Show("MiTarbeiter ID!");
             }
-            ctx.SaveChanges();
+            else if (Tischnummer.Text == "")
+            {
+                MessageBox.Show("Tischnummer!");
+            }
+            else
+            {
+                Rechnung neueRechnung = new Rechnung();
+                neueRechnung.Mitarbeiter_id = Convert.ToInt32(ID_Mitarbeiter.Text);
+                neueRechnung.Rechnung_status = "bezahlt";
+                neueRechnung.Tisch_ID = Convert.ToInt32(Tischnummer.Text);
+                neueRechnung.Rechnung_datum = DateTime.Now;
+                ctx.Rechnung.Add(neueRechnung);
+                ctx.SaveChanges();
+                int id = neueRechnung.Rechnung_id;
+                foreach (var v in BestellungAufnehmen_Rechnungsposten)
+                {
+                    v.Rechnung_id = id;
+                    ctx.Rechnung_element.Add(v);
+                }
+                ctx.SaveChanges();
+
+                ID_Mitarbeiter.Text = "";
+                Tischnummer.Text = "";
+                BestellungAufnehmen_Rechnungsposten.Clear();
+                Bestellung.DataContext = null;
+                Bestellung.DataContext = BestellungAufnehmen_Rechnungsposten;
+                Rechnungskosten.Text = "";
+            }
         }
     }
 }
