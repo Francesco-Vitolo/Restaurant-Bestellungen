@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant_Bestellungen"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1600" FontSize="20" WindowState="Maximized">
-    
+      Title="Gruppe 4" Height="1000" Width="1600" FontSize="20" WindowState="Maximized">
+
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="32"/>
@@ -139,7 +139,7 @@
                     <DataGridTextColumn Header="Rechnungsnummer" Binding="{Binding Rechnung_id}" Width="*" IsReadOnly="True" />
                     <DataGridTextColumn Header="Status" Binding="{Binding Rechnung_status}" Width="*"/>
                     <DataGridTextColumn Header="Datum" Binding="{Binding Rechnung_datum}" Width="1.5*"/>
-                    <DataGridTextColumn Header="Tischnummer" Binding="{Binding Tisch_Nummer}" Width="0.4*"/>
+                    <DataGridTextColumn Header="Tischnummer" Binding="{Binding Tisch_ID}" Width="0.4*"/>
                     <DataGridTextColumn Header="Vorname" Binding="{Binding Mitarbeiter.Vorname}" Width="*"/>
                     <DataGridTextColumn Header="Nachname" Binding="{Binding Mitarbeiter.Nachname}" Width="*"/>
                     <DataGridTextColumn Header="Email" Binding="{Binding Mitarbeiter.Email}" Width="2*"/>
@@ -176,7 +176,7 @@
         <Grid x:Name="MainGrid_Rechungen_erstellen" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="150"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="150"/>
             </Grid.RowDefinitions>
@@ -186,7 +186,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-            
+
             <ListView Grid.Row="1" Grid.Column="1"
                   x:Name="SpeiseAufnehmen" 
                   IsSynchronizedWithCurrentItem="True"
@@ -208,25 +208,10 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!--<ListView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding }" Name="Bestellung"
-                  IsSynchronizedWithCurrentItem="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock>                            
-                                <Run Text="{Binding Speise.Produkt_ID}"/>
-                                <Run Text=" - "/>
-                                <Run Text="{Binding Preis}"/>
-                                <Run Text="("/>
-                                <Run Text="{Binding Beschreibung}"/>
-                                <Run Text=")"/>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>-->
             <WrapPanel Grid.Row="1" Grid.Column="2" >
                 <TextBlock Margin="10" Text="Mitarbeiter ID:"/>
                 <TextBox x:Name="ID_Mitarbeiter" Width="100"/>
-                
+
                 <TextBlock Margin="10" Text="Tischnummer:"/>
                 <TextBox x:Name="Tischnummer" Width="100"/>
                 <DataGrid ItemsSource="{Binding }" Name="Bestellung" AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="Delete">
@@ -238,10 +223,10 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="Insgesamt:" Margin="5,0"/>
-                    <TextBlock x:Name="Rechnungskosten"/>
+                <TextBlock x:Name="Rechnungskosten"/>
                 <TextBlock Text="€" />
             </WrapPanel>
-            <Button Grid.Column="2" Grid.Row="2" Click="Rechnung_Speichern"/>
+            <Button Grid.Column="2" Grid.Row="2" Click="Rechnung_Speichern" Content="Rechnung erstellen"/>
         </Grid>
     </Grid>
 </Window>

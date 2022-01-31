@@ -1,6 +1,6 @@
 -- create and use Database
 IF DB_ID('Rechnung_element') IS NOT NULL
-create database Rechnung_element
+create database Restaurant_Bestellungen
 go
 
 USE Restaurant_Bestellungen;
@@ -57,6 +57,7 @@ CREATE TABLE Rechnung(
 
 
 CREATE TABLE Rechnung_element (
+	Rechnung_element_id INT identity(9000,1) PRIMARY KEY,
 	Rechnung_id INT,
 	Produkt_ID INT NOT NULL,
 	Anzahl INT NOT NULL,

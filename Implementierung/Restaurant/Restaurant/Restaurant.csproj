@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8BBA5D3D-6BC4-4C69-A5C7-F383CD6A7C50}</ProjectGuid>
+    <ProjectGuid>{E869CFD6-D432-4EF7-B673-3D0A39A80D73}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Restaurant_Bestellungen</RootNamespace>
-    <AssemblyName>Restaurant-Bestellungen</AssemblyName>
+    <RootNamespace>Restaurant</RootNamespace>
+    <AssemblyName>Restaurant</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
