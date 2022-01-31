@@ -64,40 +64,51 @@ namespace Restaurant_Bestellungen
         {
             int id = (int)AusgewähltesProdukt_ID.Content; //Label (hidden)
             Speise s = ctx.Speise.Where(x => x.Produkt_ID == id).FirstOrDefault();
-            ctx.Speise.Remove(s);
-            Speichern();
+
+            if(ctx.Rechnung_element.All(x => x.Speise.Produkt_ID != s.Produkt_ID)) //überprüfen,ob Produkt schon in Rechnung vorhanden
+            {
+                ctx.Speise.Remove(s);
+                ctx.SaveChanges();
+                MainGrid_SpeisekarteVerwalten.DataContext = null;
+                MainGrid_SpeisekarteVerwalten.DataContext = ctx.Speise.ToList();
+            }
+            else
+            {
+                MessageBox.Show("Produkt schon in Rechnung vorhanden.");
+            }
         }
         private void Button_SaveChanges(object sender, RoutedEventArgs e)
         {
             if (AddBeschreibung.Text != "" && AddName.Text != "" && AddPreis.Text != "")
             {
-                Speise NeueSpeise = new Speise();
-                NeueSpeise.Beschreibung = AddBeschreibung.Text;
-                NeueSpeise.Preis = Convert.ToDecimal(AddPreis.Text);
-                NeueSpeise.Produkt_Name = AddName.Text;
-                //ctx.Speise.Count();
-                ctx.Speise.Add(NeueSpeise);
-                AddBeschreibung.Text = "";
-                AddName.Text = "";
-                AddPreis.Text = "";
+                if(Decimal.TryParse(AddPreis.Text, out decimal result)) //Prüfen, ob Preis deicmal
+                {
+                    Speise NeueSpeise = new Speise();
+                    NeueSpeise.Beschreibung = AddBeschreibung.Text;
+                    NeueSpeise.Preis = Convert.ToDecimal(result);
+                    NeueSpeise.Produkt_Name = AddName.Text;
+                    //ctx.Speise.Count();
+                    ctx.Speise.Add(NeueSpeise);
+                    AddBeschreibung.Text = "";
+                    AddName.Text = "";
+                    AddPreis.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("Der eingegebe Wert muss eine Zahl sein");
+                }
             }
-            Speichern();
-        }
-
-        private void Speichern()
-        {
             ctx.SaveChanges();
             MainGrid_SpeisekarteVerwalten.DataContext = null;
             MainGrid_SpeisekarteVerwalten.DataContext = ctx.Speise.ToList();
         }
-
-       
+  
         private void Button_Rechnungsübersicht(object sender, RoutedEventArgs e)
         {
             MainGrid_Menü.Visibility = Visibility.Hidden;
             MainGrid_Rechnungsübersicht.Visibility = Visibility.Visible;
             ctx.Rechnung.Load();
-            Grid_Rechnungen.DataContext = ctx.Rechnung.ToList();      
+            Grid_Rechnungen.DataContext = ctx.Rechnung.ToList();
             //tb.Text = r.Rechnung_element.Count().ToString();
         }
 
@@ -108,6 +119,7 @@ namespace Restaurant_Bestellungen
             Rechnungspositionen = ctx.Rechnung_element.Where(x => x.Rechnung_id == r.Rechnung_id).ToList();
             Grid_Rechnungselemente.DataContext = Rechnungspositionen.ToList();
 
+            //Gesamt ausrechnen
             foreach(Rechnung_element pos in Rechnungspositionen)
             {
                 total += pos.Speise.Preis * pos.Anzahl;
