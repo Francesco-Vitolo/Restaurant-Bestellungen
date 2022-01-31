@@ -45,6 +45,7 @@ CREATE TABLE Rechnung(
 	--Rechnung status: nicht bezahlt; bezahlt;
 	Rechnung_datum DATE NOT NULL,
 	Mitarbeiter_id INT NOT NULL,
+	Tischummer INT,
 	CONSTRAINT fk_Mitarbeiter FOREIGN KEY (Mitarbeiter_id)
 			REFERENCES Mitarbeiter(Mitarbeiter_id)
 
@@ -68,18 +69,18 @@ CREATE TABLE Rechnung_element (
 
 
 INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Belgische Waffeln',15.30,'Puderzucker und Nutella oder  Puderzucker und Vanilleeis oder  Nutella und Vanilleeis')
-INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Apfelküchle',12.90,'Vanillesauce und Sahne oder  Vanilleeis und Vanillesauce')
-INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Fritas',5.20,'warme, gefüllte Teigtaschen mit Vollmilchschokolade')
+INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('ApfelkÃ¼chle',12.90,'Vanillesauce und Sahne oder  Vanilleeis und Vanillesauce')
+INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Fritas',5.20,'warme, gefÃ¼llte Teigtaschen mit Vollmilchschokolade')
 INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Tiramisu',7.50,'Eine italienische Versuchung')
-INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Cinnamon French Toast',11.10,'Eine himmlische Köstlichkeit mit Vanillesauce')
+INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Cinnamon French Toast',11.10,'Eine himmlische KÃ¶stlichkeit mit Vanillesauce')
 INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Breakfast Bowl',7.39,'Joghurt mit Fru?chten der Saison und Granola')
-INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Rührei',5.30,'Champignons und Bread Sticks (vegetarisch) oder Bacon und Bread Sticks')
+INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('RÃ¼hrei',5.30,'Champignons und Bread Sticks (vegetarisch) oder Bacon und Bread Sticks')
 INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Avocado Toast',7.50,'Eine italienische Versuchung')
 INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Brooklyn Sandwich',3.90,'mit Schinken, Gouda und Tomaten')
 INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Veggie Sandwich',6.50,'mit Hartka?se, Grillgemu?se, Tomaten und Rucola')
-INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Pasta del mare',12.50,'Orecchiette in Tomatensauce mit Oliven und Meeresfrüchten')
-INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Veggie Pasta ',10.55,'Orecchiette in Tomatensauce mit Antipastigemüse, Oliven und Grana Padano')
-INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Putenschnitzel',16.50,'paniertes Putenschnitzel mit Spätzle oder Pommes und einer feinen Rahmsauce')
+INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Pasta del mare',12.50,'Orecchiette in Tomatensauce mit Oliven und MeeresfrÃ¼chten')
+INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Veggie Pasta ',10.55,'Orecchiette in Tomatensauce mit AntipastigemÃ¼se, Oliven und Grana Padano')
+INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Putenschnitzel',16.50,'paniertes Putenschnitzel mit SpÃ¤tzle oder Pommes und einer feinen Rahmsauce')
 INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Salat Mista',5.58,'gemischter Salat mit Gurken, Tomaten und Mais')
 INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Funghi Salat ',6.10,'gemischter Salat mit gebratenen Champignons & Mais')
 
