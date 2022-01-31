@@ -1,6 +1,11 @@
-USE Restaurant_Bestellungen;
+-- create and use Database
+IF DB_ID('Rechnung_element') IS NOT NULL
+create database Rechnung_element
 go
 
+USE Restaurant_Bestellungen;
+go
+-- create tables
 IF OBJECT_ID('Rechnung_element') IS NOT NULL
   DROP TABLE Rechnung_element;
 GO
@@ -45,13 +50,9 @@ CREATE TABLE Rechnung(
 	--Rechnung status: nicht bezahlt; bezahlt;
 	Rechnung_datum DATE NOT NULL,
 	Mitarbeiter_id INT NOT NULL,
-	Tischummer INT,
+	Tisch_ID INT,
 	CONSTRAINT fk_Mitarbeiter FOREIGN KEY (Mitarbeiter_id)
 			REFERENCES Mitarbeiter(Mitarbeiter_id)
-
-	--FOREIGN KEY (Kunde_id) REFERENCES Kunde (Kunde_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	--FOREIGN KEY (Restaurant_id) REFERENCES Restaurant (Restaurant_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	--FOREIGN KEY (Mitarbeiter_id) REFERENCES Mitarbeiter (Mitarbeiter_id) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 
@@ -63,11 +64,9 @@ CREATE TABLE Rechnung_element (
 			REFERENCES Speise(Produkt_ID),
 	CONSTRAINT fk_Rechnung FOREIGN KEY (Rechnung_ID)
 			REFERENCES Rechnung(Rechnung_ID)
-	--FOREIGN KEY (Rechnung_id) REFERENCES Rechnung (Rechnung_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	--FOREIGN KEY (Produkt_ID) REFERENCES Speise (Produkt_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
+-- Insert Data 
 INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Belgische Waffeln',15.30,'Puderzucker und Nutella oder  Puderzucker und Vanilleeis oder  Nutella und Vanilleeis')
 INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Apfelküchle',12.90,'Vanillesauce und Sahne oder  Vanilleeis und Vanillesauce')
 INSERT INTO Speise(Produkt_Name,Preis,Beschreibung) VALUES('Fritas',5.20,'warme, gefüllte Teigtaschen mit Vollmilchschokolade')
@@ -92,8 +91,10 @@ INSERT INTO Mitarbeiter(Vorname,Nachname, Email, Telefon) VALUES('Thomas','Braun
 INSERT INTO Mitarbeiter(Vorname,Nachname, Email, Telefon) VALUES('markus','Habeb','markus.Habeb@my-mauritius.com','017632585999')
 
 
-INSERT INTO Rechnung(Rechnung_status, Rechnung_datum, Mitarbeiter_id) VALUES('bezahlt','20201006',1000);
-INSERT INTO Rechnung(Rechnung_status, Rechnung_datum, Mitarbeiter_id) VALUES('nicht bezahlt','20201006',1001);
+INSERT INTO Rechnung(Rechnung_status, Rechnung_datum, Mitarbeiter_id,Tisch_ID) VALUES('bezahlt','20201006',1000,5);
+INSERT INTO Rechnung(Rechnung_status, Rechnung_datum, Mitarbeiter_id,Tisch_ID) VALUES('nicht bezahlt','20201007',1001,3);
+INSERT INTO Rechnung(Rechnung_status, Rechnung_datum, Mitarbeiter_id,Tisch_ID) VALUES(' bezahlt','20201007',1002,7);
+INSERT INTO Rechnung(Rechnung_status, Rechnung_datum, Mitarbeiter_id,Tisch_ID) VALUES('nicht bezahlt','20201008',1002,9);
 
 
 INSERT INTO Rechnung_element(Rechnung_id, Produkt_ID, Anzahl) VALUES(3000,2001,2);
@@ -102,4 +103,12 @@ INSERT INTO Rechnung_element(Rechnung_id, Produkt_ID, Anzahl) VALUES(3000,2003,5
 
 INSERT INTO Rechnung_element(Rechnung_id, Produkt_ID, Anzahl) VALUES(3001,2004,1);
 INSERT INTO Rechnung_element(Rechnung_id, Produkt_ID, Anzahl) VALUES(3001,2009,2);
-INSERT INTO Rechnung_element(Rechnung_id, Produkt_ID, Anzahl) VALUES(3001,2002,20);
+INSERT INTO Rechnung_element(Rechnung_id, Produkt_ID, Anzahl) VALUES(3001,2002,2);
+
+INSERT INTO Rechnung_element(Rechnung_id, Produkt_ID, Anzahl) VALUES(3002,2001,1);
+INSERT INTO Rechnung_element(Rechnung_id, Produkt_ID, Anzahl) VALUES(3002,2013,1);
+
+INSERT INTO Rechnung_element(Rechnung_id, Produkt_ID, Anzahl) VALUES(3003,2013,2);
+INSERT INTO Rechnung_element(Rechnung_id, Produkt_ID, Anzahl) VALUES(3003,2007,2);
+INSERT INTO Rechnung_element(Rechnung_id, Produkt_ID, Anzahl) VALUES(3003,2009,2);
+
