@@ -1,3 +1,5 @@
+USE master;
+GO
 -- create and use Database
 IF DB_ID('Rechnung_element') IS NOT NULL
 create database Restaurant_Bestellungen
