@@ -7,9 +7,7 @@
  Ziel ist es, das Erstellen von Rechnungen und das Aufnehmen von Bestellungen mit einer Software zu
  vereinfachen.
  Das Program soll einfach bedienbar sein und die Korrektheit der Daten muss gewährleistet sein.
- 
- 1. Schritt: SQL ausführen.
- 2. Schritt: In Visual Studio, ADO.NET Entity Data Model auswählen und Restaurant_Bestellungen Datenbank auswählen.
+
  
  #Hauptmenü:<br>
  Button "Speisekarte verwalten": Gericht hinzufügen, ändern und löschen.
